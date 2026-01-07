@@ -1,2 +1,2 @@
 # dice_rolling_game
-It's a simple game for [practice
+It's a simple game for practice

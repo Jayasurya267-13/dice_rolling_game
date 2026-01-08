@@ -1,55 +1,84 @@
-import heapq
+🎲 Dice Rolling Game (Python)
 
-def rotate_dice(top, left, front, direction):
-    right = 7 - left
-    back = 7 - front
-    bottom = 7 - top
-    if direction == 'up':
-        return front, left, bottom
-    if direction == 'down':
-        return back, left, top
-    if direction == 'left':
-        return left, bottom, front
-    if direction == 'right':
-        return right, top, front
+This project implements a dice rolling game using Python.
+The program finds the minimum cost path from a source cell to a destination cell on a grid, where the cost depends on the top face of a rolling dice.
 
-def build_structure(n, placements):
-    pos = {}
-    grid = {}
-    for a, b, d in sorted(placements):
-        x, y = pos.get(a, (0, 0))
-        if d == 'up': y -= 1
-        elif d == 'down': y += 1
-        elif d == 'left': x -= 1
-        elif d == 'right': x += 1
-        pos[b] = (x, y)
-        grid[(x, y)] = b
-    return pos, grid
+📌 Description
 
-def dijkstra(pos, grid, src, dst, top, left, front):
-    start = pos[src]
-    end = pos[dst]
-    heap = [(0, start[0], start[1], top, left, front)]
-    visited = set()
-    while heap:
-        cost, x, y, t, l, f = heapq.heappop(heap)
-        if (x, y) == end:
-            return cost
-        state = (x, y, t, l, f)
-        if state in visited:
-            continue
-        visited.add(state)
-        for dir, dx, dy in [('up', 0, -1), ('down', 0, 1), ('left', -1, 0), ('right', 1, 0)]:
-            nx, ny = x + dx, y + dy
-            if (nx, ny) in grid:
-                nt, nl, nf = rotate_dice(t, l, f, dir)
-                heapq.heappush(heap, (cost + nt, nx, ny, nt, nl, nf))
-    return -1
+A dice is placed on a grid.
 
-n = int(input())
-placements = [input().split() for _ in range(n)]
-placements = [(int(a), int(b), d) for a, b, d in placements]
-src, dst = map(int, input().split())
-top, left, front = map(int, input().split())
-pos, grid = build_structure(n, placements)
-print(dijkstra(pos, grid, src, dst, top, left, front))
+The dice can move up, down, left, or right.
+
+Each move rolls the dice and changes its orientation.
+
+The cost of each move is the number on the top face of the dice after rolling.
+
+The goal is to reach the destination with the minimum total cost.
+
+🧠 Algorithm (Simple)
+
+Read input values (grid structure, source, destination, dice faces)
+
+Build the grid using given directions
+
+Track dice orientation while moving
+
+Use Dijkstra’s Algorithm to:
+
+Explore all possible paths
+
+Always choose the path with the lowest cost
+
+Stop when the destination is reached
+
+Print the minimum cost
+
+🔄 Dice Rotation Logic
+
+Opposite faces of a dice always add up to 7
+
+Dice orientation changes based on movement direction:
+
+Up
+
+Down
+
+Left
+
+Right
+
+🧪 Input Includes
+
+Number of placements
+
+Directional connections between cells
+
+Source and destination
+
+Initial dice orientation (top, left, front)
+
+📤 Output
+
+Minimum cost to reach the destination
+
+Prints -1 if the destination is unreachable
+
+🚀 Concepts Used
+
+Dice simulation
+
+Grid traversal
+
+Priority Queue (heapq)
+
+Dijkstra’s shortest path algorithm
+
+🎯 Use Cases
+
+Game simulations
+
+Pathfinding problems
+
+Learning Dijkstra’s algorithm
+
+Understanding dice rotation logic

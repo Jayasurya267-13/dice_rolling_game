@@ -1,84 +1,110 @@
-🎲 Dice Rolling Game (Python)
+# 🎲 Dice Rolling Path Finder
 
-This project implements a dice rolling game using Python.
-The program finds the minimum cost path from a source cell to a destination cell on a grid, where the cost depends on the top face of a rolling dice.
+This project simulates rolling a dice across a connected grid and calculates the **minimum cost** required to move the dice from a starting block to a destination block. The cost depends on the **top face value of the dice after each move**.
 
-📌 Description
+The solution uses **Dijkstra’s algorithm** to find the most efficient path while tracking the dice’s orientation at every step.
 
-A dice is placed on a grid.
+---
 
-The dice can move up, down, left, or right.
+## 📌 Problem Overview
 
-Each move rolls the dice and changes its orientation.
+* Each block is connected to another block in one of four directions: `up`, `down`, `left`, or `right`.
+* A dice is placed on the starting block with a given orientation.
+* Every time the dice rolls, its faces change based on the direction of movement.
+* The cost of moving to a new block is equal to the **top face value** of the dice after the roll.
+* The goal is to reach the destination block with the **minimum total cost**.
 
-The cost of each move is the number on the top face of the dice after rolling.
+---
 
-The goal is to reach the destination with the minimum total cost.
+## ⚙️ How It Works
 
-🧠 Algorithm (Simple)
+### 1. Dice Rotation
 
-Read input values (grid structure, source, destination, dice faces)
+The dice orientation is updated whenever it rolls in a direction. The logic ensures correct face changes using opposite face rules (sum of opposite faces = 7).
 
-Build the grid using given directions
+### 2. Grid Construction
 
-Track dice orientation while moving
+The blocks and their relative positions are built into a 2D grid based on the input connections.
 
-Use Dijkstra’s Algorithm to:
+### 3. Shortest Path Search
 
-Explore all possible paths
+Dijkstra’s algorithm is used to:
 
-Always choose the path with the lowest cost
+* Explore all valid paths
+* Track dice orientation at each position
+* Always choose the path with the lowest cost so far
 
-Stop when the destination is reached
+---
 
-Print the minimum cost
+## 🧠 Algorithm Used
 
-🔄 Dice Rotation Logic
+* **Dijkstra’s Algorithm**
+* **Priority Queue (Heap)**
+* **State Tracking** (position + dice orientation)
 
-Opposite faces of a dice always add up to 7
+This guarantees the shortest path while handling changing dice values.
 
-Dice orientation changes based on movement direction:
+---
 
-Up
+## 📥 Input Format
 
-Down
+1. Number of connections `n`
+2. `n` lines of connections:
 
-Left
+   ```
+   a b direction
+   ```
+3. Source block and destination block:
 
-Right
+   ```
+   src dst
+   ```
+4. Initial dice orientation:
 
-🧪 Input Includes
+   ```
+   top left front
+   ```
 
-Number of placements
+---
 
-Directional connections between cells
+## 📤 Output
 
-Source and destination
+* A single integer representing the **minimum cost** to reach the destination.
+* Returns `-1` if the destination cannot be reached.
 
-Initial dice orientation (top, left, front)
+---
 
-📤 Output
+## ▶️ How to Run
 
-Minimum cost to reach the destination
+```bash
+python dice_rolling_game.py
+```
 
-Prints -1 if the destination is unreachable
+Then provide input as described above.
 
-🚀 Concepts Used
+---
 
-Dice simulation
+## 📂 Example Use Case
 
-Grid traversal
+This project is useful for:
 
-Priority Queue (heapq)
+* Algorithm practice (graphs and pathfinding)
+* Understanding state-based search problems
+* Simulating real-world rolling mechanics in games or puzzles
 
-Dijkstra’s shortest path algorithm
+---
 
-🎯 Use Cases
+## 🚀 Future Improvements
 
-Game simulations
+* Add visualization of dice movement
+* Support larger grids
+* Convert to a GUI-based simulation
 
-Pathfinding problems
+---
 
-Learning Dijkstra’s algorithm
+## 🧑‍💻 Author
 
-Understanding dice rotation logic
+Created as a **Python mini project** to practice algorithms, data structures, and logical problem-solving.
+
+Feel free to fork, improve, and share! 😊
+

@@ -102,8 +102,6 @@ This project is useful for:
 
 ---
 
-## 🧑‍💻 Author
-
 Created as a **Python mini project** to practice algorithms, data structures, and logical problem-solving.
 
 Feel free to fork, improve, and share! 😊
